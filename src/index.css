@@ -1388,6 +1388,11 @@ body {
   animation: fadeIn 0.2s ease;
 }
 
+.page-header-actions {
+  display: flex;
+  gap: 12px;
+}
+
 @media (max-width: 991px) {
   .app-sidebar {
     position: fixed;
@@ -1434,7 +1439,6 @@ body {
     gap: 12px;
   }
 
-
   .dashboard-grid {
     grid-template-columns: 1fr;
   }
@@ -1446,5 +1450,17 @@ body {
   .settings-layout {
     grid-template-columns: 1fr;
     gap: 16px;
+  }
+
+  .page-header-actions {
+    width: 100%;
+    flex-direction: column;
+    gap: 10px;
+  }
+}
+
+@media (max-width: 768px) {
+  .profile-info {
+    display: none;
   }
 }

@@ -36,7 +36,7 @@ export default function Dashboard() {
           <h1 className="page-title">Executive Dashboard</h1>
           <p className="page-subtitle">Platform overview, active compliance statuses, and auditor telemetry.</p>
         </div>
-        <div style={{ display: 'flex', gap: '12px' }}>
+        <div className="page-header-actions">
           <button className="btn btn-secondary" onClick={() => navigate('/system-activity')}>
             <Activity size={16} /> View Activity Logs
           </button>
