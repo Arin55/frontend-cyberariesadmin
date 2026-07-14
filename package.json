@@ -10,7 +10,10 @@
     "preview": "vite preview",
     "dev:client": "npm run dev --prefix client",
     "build:client": "npm run build --prefix client",
-    "install:client": "npm install --prefix client"
+    "install:client": "npm install --prefix client",
+    "dev:auditor": "npm run dev --prefix cyberaries-auditor",
+    "build:auditor": "npm run build --prefix cyberaries-auditor",
+    "install:auditor": "npm install --prefix cyberaries-auditor"
   },
   "dependencies": {
     "@tailwindcss/vite": "^4.3.2",
