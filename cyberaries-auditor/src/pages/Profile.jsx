@@ -2,7 +2,7 @@ import React from 'react';
 
 const Profile = () => {
   return (
-    <div className="page">
+    <div className="page-container">
       <div className="page-header" style={{ marginBottom: '24px' }}>
         <h1 className="page-title">Profile</h1>
       </div>

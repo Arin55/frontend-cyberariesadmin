@@ -7,7 +7,7 @@ const AuditReview = () => {
   const { auditId } = useParams();
 
   return (
-    <div className="audit-review-page">
+    <div className="page-container audit-review-page">
       <div className="review-header">
         <div className="breadcrumb">
           <Link to="/assigned-audits" className="back-link">

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { useApp } from '../context/AppContext';
 import logo from '../assets/cyberaries-logo.png';
-import { ShieldCheck } from 'lucide-react';
+import { ShieldCheck, User, Mail, Lock, Eye, EyeOff } from 'lucide-react';
 
 export default function Register() {
   const { registerAdmin } = useApp();
@@ -16,6 +16,8 @@ export default function Register() {
     role: 'Admin'
   });
   const [error, setError] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
   const handleChange = (e) => {
     setFormData({
@@ -58,107 +60,144 @@ export default function Register() {
   };
 
   return (
-    <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: '100vh', padding: '24px', backgroundColor: 'var(--bg-main)' }}>
-      <div className="dashboard-section-card" style={{ width: '560px', padding: '32px', backgroundColor: '#FFFFFF', boxShadow: 'var(--shadow-lg)' }}>
-        <div style={{ textAlign: 'center', marginBottom: '24px' }}>
-          <img src={logo} alt="CyberAries Logo" style={{ height: '48px', width: 'auto', marginBottom: '12px', objectFit: 'contain' }} />
-          <h2 style={{ fontSize: '22px', fontWeight: '700', letterSpacing: '-0.5px', color: 'var(--text-primary)' }}>Create Admin Account</h2>
-          <p style={{ fontSize: '13px', color: 'var(--text-secondary)', marginTop: '2px' }}>Cybersecurity Compliance Management Platform</p>
+    <div className="auth-page-wrapper">
+      <div className="auth-card-redesign" style={{ maxWidth: '540px' }}>
+        {/* Logo centered inside card */}
+        <div className="auth-logo-container">
+          <img src={logo} alt="CyberAries Logo" className="auth-logo-img" />
         </div>
 
-        {error && <div className="error-message" style={{ padding: '8px 12px', fontSize: '13px', marginBottom: '16px' }}>{error}</div>}
+        <div className="auth-card-header">
+          <h2 className="auth-card-title">Create Admin Account</h2>
+          <p className="auth-card-subtitle">Set up your credentials to manage the CyberAries platform.</p>
+        </div>
+
+        {error && (
+          <div className="error-message" style={{ padding: '12px', fontSize: '13px', marginBottom: '16px', backgroundColor: '#FEF2F2', border: '1px solid #FCA5A5', color: '#DC2626', borderRadius: '8px' }}>
+            {error}
+          </div>
+        )}
 
         <form onSubmit={handleSubmit}>
-          <div className="form-row">
-            <div className="form-group">
-              <label className="form-label">Full Name</label>
-              <input
-                type="text"
-                name="fullName"
-                className="form-input"
-                placeholder="e.g. John Doe"
-                value={formData.fullName}
-                onChange={handleChange}
-                required
-              />
+          <div className="auth-form-row">
+            <div className="auth-input-group" style={{ flex: 1 }}>
+              <label className="form-label" style={{ fontSize: '13px', fontWeight: '600', color: '#64748B' }}>Full Name</label>
+              <div className="auth-input-wrapper">
+                <input
+                  type="text"
+                  name="fullName"
+                  className="auth-input-field"
+                  placeholder="e.g. John Doe"
+                  value={formData.fullName}
+                  onChange={handleChange}
+                  required
+                />
+                <User size={16} className="auth-input-icon" />
+              </div>
             </div>
             
-            <div className="form-group">
-              <label className="form-label">Username</label>
-              <input
-                type="text"
-                name="username"
-                className="form-input"
-                placeholder="admin123"
-                value={formData.username}
-                onChange={handleChange}
-                required
-              />
+            <div className="auth-input-group" style={{ flex: 1 }}>
+              <label className="form-label" style={{ fontSize: '13px', fontWeight: '600', color: '#64748B' }}>Username</label>
+              <div className="auth-input-wrapper">
+                <input
+                  type="text"
+                  name="username"
+                  className="auth-input-field"
+                  placeholder="admin123"
+                  value={formData.username}
+                  onChange={handleChange}
+                  required
+                />
+                <User size={16} className="auth-input-icon" />
+              </div>
             </div>
           </div>
 
-          <div className="form-row">
-            <div className="form-group" style={{ flex: '1.6' }}>
-              <label className="form-label">Email Address</label>
-              <input
-                type="email"
-                name="email"
-                className="form-input"
-                placeholder="admin@cyberaries.com"
-                value={formData.email}
-                onChange={handleChange}
-                required
-              />
+          <div className="auth-form-row">
+            <div className="auth-input-group" style={{ flex: '1.6' }}>
+              <label className="form-label" style={{ fontSize: '13px', fontWeight: '600', color: '#64748B' }}>Email Address</label>
+              <div className="auth-input-wrapper">
+                <input
+                  type="email"
+                  name="email"
+                  className="auth-input-field"
+                  placeholder="admin@cyberaries.com"
+                  value={formData.email}
+                  onChange={handleChange}
+                  required
+                />
+                <Mail size={16} className="auth-input-icon" />
+              </div>
             </div>
 
-            <div className="form-group" style={{ flex: '1' }}>
-              <label className="form-label">Role</label>
+            <div className="auth-input-group" style={{ flex: '1' }}>
+              <label className="form-label" style={{ fontSize: '13px', fontWeight: '600', color: '#64748B' }}>Role</label>
               <input
                 type="text"
                 name="role"
-                className="form-input"
+                className="auth-input-field"
                 value="Admin"
                 disabled
-                style={{ backgroundColor: 'var(--bg-main)', cursor: 'not-allowed' }}
+                style={{ backgroundColor: '#F1F5F9', cursor: 'not-allowed', paddingLeft: '14px' }}
               />
             </div>
           </div>
 
-          <div className="form-row">
-            <div className="form-group">
-              <label className="form-label">Password</label>
-              <input
-                type="password"
-                name="password"
-                className="form-input"
-                placeholder="••••••••"
-                value={formData.password}
-                onChange={handleChange}
-                required
-              />
+          <div className="auth-form-row">
+            <div className="auth-input-group" style={{ flex: 1 }}>
+              <label className="form-label" style={{ fontSize: '13px', fontWeight: '600', color: '#64748B' }}>Password</label>
+              <div className="auth-input-wrapper">
+                <input
+                  type={showPassword ? "text" : "password"}
+                  name="password"
+                  className="auth-input-field"
+                  placeholder="••••••••"
+                  value={formData.password}
+                  onChange={handleChange}
+                  required
+                />
+                <Lock size={16} className="auth-input-icon" />
+                <button
+                  type="button"
+                  className="auth-password-toggle"
+                  onClick={() => setShowPassword(!showPassword)}
+                >
+                  {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
+                </button>
+              </div>
             </div>
 
-            <div className="form-group">
-              <label className="form-label">Confirm Password</label>
-              <input
-                type="password"
-                name="confirmPassword"
-                className="form-input"
-                placeholder="••••••••"
-                value={formData.confirmPassword}
-                onChange={handleChange}
-                required
-              />
+            <div className="auth-input-group" style={{ flex: 1 }}>
+              <label className="form-label" style={{ fontSize: '13px', fontWeight: '600', color: '#64748B' }}>Confirm Password</label>
+              <div className="auth-input-wrapper">
+                <input
+                  type={showConfirmPassword ? "text" : "password"}
+                  name="confirmPassword"
+                  className="auth-input-field"
+                  placeholder="••••••••"
+                  value={formData.confirmPassword}
+                  onChange={handleChange}
+                  required
+                />
+                <Lock size={16} className="auth-input-icon" />
+                <button
+                  type="button"
+                  className="auth-password-toggle"
+                  onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                >
+                  {showConfirmPassword ? <EyeOff size={18} /> : <Eye size={18} />}
+                </button>
+              </div>
             </div>
           </div>
 
-          <button type="submit" className="btn btn-primary btn-block" style={{ marginTop: '8px', padding: '10px 20px' }}>
-            <ShieldCheck size={16} /> Create Admin Account
+          <button type="submit" className="auth-btn-primary" style={{ marginTop: '12px' }}>
+            <ShieldCheck size={18} /> Create Account
           </button>
         </form>
 
-        <div style={{ textAlign: 'center', marginTop: '16px', fontSize: '13px', color: 'var(--text-secondary)' }}>
-          Already have an account? <Link to="/login" style={{ color: 'var(--primary)', fontWeight: '600', textDecoration: 'none' }}>Login here</Link>
+        <div style={{ textAlign: 'center', marginTop: '24px', fontSize: '13px', color: '#64748B' }}>
+          Already have an account? <Link to="/login" style={{ color: '#E53935', fontWeight: '600', textDecoration: 'none' }}>Login here</Link>
         </div>
       </div>
     </div>

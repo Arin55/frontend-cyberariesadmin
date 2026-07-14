@@ -2,8 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate, useLocation, Link } from 'react-router-dom';
 import { useApp } from '../context/AppContext';
 import logo from '../assets/cyberaries-logo.png';
-import heroImg from '../assets/hero.png';
-import { LogIn, ShieldAlert, Check } from 'lucide-react';
+import { LogIn, ShieldAlert, Check, User, Lock, Eye, EyeOff } from 'lucide-react';
 
 export default function Login() {
   const { loginAdmin } = useApp();
@@ -12,6 +11,7 @@ export default function Login() {
   
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
   const [rememberMe, setRememberMe] = useState(false);
   const [error, setError] = useState('');
   const [success, setSuccess] = useState(
@@ -37,182 +37,72 @@ export default function Login() {
   };
 
   return (
-    <div className="auth-container">
-      {/* Left Column - Premium Cybersecurity Branding & Illustration */}
-      <div className="auth-sidebar">
-        {/* Cyber Theme Decorative Background */}
-        <div style={{ 
-          position: 'absolute', 
-          inset: 0, 
-          overflow: 'hidden', 
-          pointerEvents: 'none', 
-          zIndex: 1,
-          maskImage: 'radial-gradient(circle at 60px 60px, transparent 15%, black 60%)',
-          WebkitMaskImage: 'radial-gradient(circle at 60px 60px, transparent 15%, black 60%)'
-        }}>
-          {/* Grid Texture */}
-          <div style={{
-            position: 'absolute',
-            inset: 0,
-            backgroundImage: 'linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px)',
-            backgroundSize: '45px 45px',
-          }}></div>
-
-          {/* Soft light-blue glow (#7DD3FC) behind the logo only */}
-          <div style={{
-            position: 'absolute',
-            top: '0px',
-            left: '0px',
-            width: '280px',
-            height: '180px',
-            background: 'radial-gradient(circle, rgba(125, 211, 252, 0.35) 0%, rgba(125, 211, 252, 0.1) 50%, transparent 80%)',
-            filter: 'blur(10px)',
-          }}></div>
-
-          {/* Circuit Lines, Connections, and Hexagons */}
-          <svg style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', opacity: 0.07 }} viewBox="0 0 400 800" fill="none" xmlns="http://www.w3.org/2000/svg">
-            {/* Circuit Line 1 */}
-            <path d="M-50 120 H180 L230 170 V320 L280 370 H450" stroke="#FFFFFF" strokeWidth="1.5" strokeDasharray="6 6" />
-            <circle cx="180" cy="120" r="3" fill="#FFFFFF" />
-            <circle cx="230" cy="170" r="3" fill="#FFFFFF" />
-            <circle cx="280" cy="370" r="3" fill="#FFFFFF" />
-
-            {/* Circuit Line 2 */}
-            <path d="M450 620 H320 L270 570 V420 L220 370 H-50" stroke="#FFFFFF" strokeWidth="1.5" />
-            <circle cx="320" cy="620" r="3" fill="#FFFFFF" />
-            <circle cx="270" cy="570" r="3" fill="#FFFFFF" />
-            <circle cx="220" cy="370" r="3" fill="#FFFFFF" />
-
-            {/* Hexagon 1 */}
-            <polygon points="120,220 150,237 150,272 120,290 90,272 90,237" stroke="#FFFFFF" strokeWidth="1" />
-            
-            {/* Hexagon 2 */}
-            <polygon points="280,480 310,497 310,532 280,550 250,532 250,497" stroke="#FFFFFF" strokeWidth="1" />
-            
-            {/* Hexagon 3 (Larger) */}
-            <polygon points="200,320 250,348 250,405 200,433 150,405 150,348" stroke="#FFFFFF" strokeWidth="1.5" strokeDasharray="3 3" />
-
-            {/* Network Connections */}
-            <line x1="180" y1="120" x2="120" y2="220" stroke="#FFFFFF" strokeWidth="0.5" />
-            <line x1="280" y1="370" x2="200" y2="320" stroke="#FFFFFF" strokeWidth="0.5" />
-            <line x1="220" y1="370" x2="280" y2="480" stroke="#FFFFFF" strokeWidth="0.5" />
-          </svg>
-
-          {/* Floating low-opacity cybersecurity particles */}
-          <div style={{ position: 'absolute', top: '15%', left: '20%', width: '6px', height: '6px', backgroundColor: '#FFFFFF', borderRadius: '50%', opacity: 0.06 }}></div>
-          <div style={{ position: 'absolute', top: '45%', left: '75%', width: '8px', height: '8px', backgroundColor: '#FFFFFF', borderRadius: '50%', opacity: 0.04 }}></div>
-          <div style={{ position: 'absolute', top: '75%', left: '15%', width: '5px', height: '5px', backgroundColor: '#FFFFFF', borderRadius: '50%', opacity: 0.05 }}></div>
-          <div style={{ position: 'absolute', top: '60%', left: '40%', width: '7px', height: '7px', backgroundColor: '#FFFFFF', borderRadius: '50%', opacity: 0.03 }}></div>
+    <div className="auth-page-wrapper">
+      <div className="auth-card-redesign">
+        {/* Logo centered inside card */}
+        <div className="auth-logo-container">
+          <img src={logo} alt="CyberAries Logo" className="auth-logo-img" />
         </div>
 
-        <div className="auth-logo-section" style={{ position: 'relative', zIndex: 10 }}>
-          <img src={logo} alt="CyberAries Logo" className="auth-logo" style={{ height: '58px', width: 'auto' }} />
-        </div>
-
-        <div className="auth-illustration-container">
-          {/* Custom SVG Cybersecurity Shield compliance animation graphic */}
-          <svg 
-            viewBox="0 0 200 200" 
-            style={{ width: '180px', height: '180px', marginBottom: '24px', filter: 'drop-shadow(0 10px 20px rgba(0,0,0,0.3))' }}
-          >
-            {/* Outer Ring */}
-            <circle cx="100" cy="100" r="80" fill="none" stroke="rgba(255,255,255,0.05)" strokeWidth="6" />
-            <circle cx="100" cy="100" r="80" fill="none" stroke="var(--primary)" strokeWidth="3" strokeDasharray="300 200" />
-            
-            {/* Nodes */}
-            <circle cx="100" cy="20" r="6" fill="var(--primary)" />
-            <circle cx="20" cy="100" r="6" fill="#10B981" />
-            <circle cx="100" cy="180" r="6" fill="#3B82F6" />
-            <circle cx="180" cy="100" r="6" fill="#F59E0B" />
-            
-            {/* Core Shield */}
-            <path 
-              d="M100 50 L150 70 V115 C150 145 128 165 100 175 C72 165 50 145 50 115 V70 Z" 
-              fill="rgba(255,255,255,0.07)" 
-              stroke="rgba(255,255,255,0.2)" 
-              strokeWidth="2" 
-            />
-            
-            {/* Inner Shield check */}
-            <path 
-              d="M85 110 L95 120 L120 95" 
-              fill="none" 
-              stroke="#10B981" 
-              strokeWidth="5" 
-              strokeLinecap="round" 
-              strokeLinejoin="round" 
-            />
-          </svg>
-
-          <h3 className="auth-intro-title">Ensure Compliance, Protect Assets</h3>
-          <p className="auth-intro-subtitle">
-            An enterprise-ready governance, risk management, and cybersecurity alignment system. Monitor compliance standards, assign auditors, and manage risk parameters from a unified center.
-          </p>
-          
-          {/* Also include the hero image from assets */}
-          {heroImg && (
-            <img 
-              src={heroImg} 
-              alt="Cybersecurity Hero" 
-              style={{ marginTop: '24px', opacity: 0.8, maxHeight: '60px', objectFit: 'contain' }} 
-            />
-          )}
-        </div>
-
-        <div className="auth-footer-text">
-          &copy; {new Date().getFullYear()} CyberAries Inc. All rights reserved. Version 1.2.0-Enterprise.
-        </div>
-      </div>
-
-      {/* Right Column - Enterprise Login Form */}
-      <div className="auth-form-section">
-        <div className="auth-form-header">
-          <h2 className="auth-form-title">Sign In</h2>
-          <p className="auth-form-subtitle">
-            Enter your administrator credentials below to access the compliance panel.
-          </p>
+        <div className="auth-card-header">
+          <h2 className="auth-card-title">Admin Portal</h2>
+          <p className="auth-card-subtitle">Manage compliance standards, companies, and auditor registry.</p>
         </div>
 
         {error && (
-          <div className="error-message" style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+          <div className="error-message" style={{ display: 'flex', alignItems: 'center', gap: '8px', padding: '12px', fontSize: '13px', marginBottom: '16px', backgroundColor: '#FEF2F2', border: '1px solid #FCA5A5', color: '#DC2626', borderRadius: '8px' }}>
             <ShieldAlert size={16} />
             <span>{error}</span>
           </div>
         )}
 
         {success && (
-          <div style={{ backgroundColor: '#ECFDF5', border: '1px solid #10B981', color: '#047857', padding: '12px 16px', borderRadius: 'var(--radius-md)', fontSize: '14px', marginBottom: '20px', display: 'flex', alignItems: 'center', gap: '8px' }}>
+          <div style={{ backgroundColor: '#ECFDF5', border: '1px solid #10B981', color: '#047857', padding: '12px', borderRadius: '8px', fontSize: '13px', marginBottom: '16px', display: 'flex', alignItems: 'center', gap: '8px' }}>
             <Check size={16} />
             <span>{success}</span>
           </div>
         )}
 
         <form onSubmit={handleSubmit}>
-          <div className="form-group">
-            <label className="form-label">Username</label>
-            <input
-              type="text"
-              className="form-input"
-              placeholder="e.g. admin"
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
-              required
-            />
+          <div className="auth-input-group">
+            <label className="form-label" style={{ fontSize: '13px', fontWeight: '600', color: '#64748B' }}>Username</label>
+            <div className="auth-input-wrapper">
+              <input
+                type="text"
+                className="auth-input-field"
+                placeholder="e.g. admin"
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
+                required
+              />
+              <User size={16} className="auth-input-icon" />
+            </div>
           </div>
 
-          <div className="form-group">
-            <label className="form-label">Password</label>
-            <input
-              type="password"
-              className="form-input"
-              placeholder="••••••••"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              required
-            />
+          <div className="auth-input-group">
+            <label className="form-label" style={{ fontSize: '13px', fontWeight: '600', color: '#64748B' }}>Password</label>
+            <div className="auth-input-wrapper">
+              <input
+                type={showPassword ? "text" : "password"}
+                className="auth-input-field"
+                placeholder="••••••••"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                required
+              />
+              <Lock size={16} className="auth-input-icon" />
+              <button
+                type="button"
+                className="auth-password-toggle"
+                onClick={() => setShowPassword(!showPassword)}
+                aria-label={showPassword ? "Hide password" : "Show password"}
+              >
+                {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
+              </button>
+            </div>
           </div>
 
-          <div className="form-actions">
+          <div className="form-actions" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '24px', fontSize: '13px' }}>
             <label className="checkbox-container">
               <input
                 type="checkbox"
@@ -225,18 +115,19 @@ export default function Login() {
             <Link 
               to="/forgot-password" 
               className="forgot-password-link"
+              style={{ color: '#E53935', fontWeight: '600', textDecoration: 'none' }}
             >
               Forgot Password?
             </Link>
           </div>
 
-          <button type="submit" className="btn btn-primary btn-block">
-            <LogIn size={18} /> Login to Platform
+          <button type="submit" className="auth-btn-primary">
+            <LogIn size={18} /> Sign In
           </button>
 
           <div style={{ display: 'flex', alignItems: 'center', margin: '20px 0', color: 'var(--text-secondary)', fontSize: '13px' }}>
             <div style={{ flex: 1, height: '1px', backgroundColor: 'var(--border-color)' }}></div>
-            <span style={{ padding: '0 12px' }}>or continue with</span>
+            <span style={{ padding: '0 12px', color: '#64748B' }}>or continue with</span>
             <div style={{ flex: 1, height: '1px', backgroundColor: 'var(--border-color)' }}></div>
           </div>
 
@@ -244,7 +135,7 @@ export default function Login() {
             type="button" 
             className="btn btn-secondary btn-block" 
             onClick={() => alert('Redirecting to Google Enterprise Identity Provider...')}
-            style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '10px' }}
+            style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '10px', width: '100%', padding: '11px', borderRadius: '10px', fontSize: '14.5px' }}
           >
             <svg viewBox="0 0 24 24" width="18" height="18" style={{ display: 'block' }}>
               <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/>
@@ -255,16 +146,16 @@ export default function Login() {
             <span>Sign in with Google</span>
           </button>
 
-          <div style={{ textAlign: 'center', marginTop: '20px', fontSize: '13.5px', color: 'var(--text-secondary)' }}>
+          <div style={{ textAlign: 'center', marginTop: '24px', fontSize: '13.5px', color: '#64748B' }}>
             Don't have an account?{' '}
-            <Link to="/register" style={{ color: 'var(--primary)', fontWeight: '600', textDecoration: 'none' }}>
+            <Link to="/register" style={{ color: '#E53935', fontWeight: '600', textDecoration: 'none' }}>
               Create Account
             </Link>
           </div>
         </form>
 
-        <div style={{ marginTop: '36px', borderTop: '1px solid var(--border-color)', paddingTop: '20px', fontSize: '13px', color: 'var(--text-secondary)', textAlign: 'center' }}>
-          <span style={{ fontWeight: '600' }}>Tip:</span> For testing purposes, please log in using default username: <code style={{ fontSize: '12px', background: '#F1F5F9', padding: '2px 4px', borderRadius: '4px' }}>admin</code> / password: <code style={{ fontSize: '12px', background: '#F1F5F9', padding: '2px 4px', borderRadius: '4px' }}>password</code>.
+        <div style={{ marginTop: '28px', borderTop: '1px solid var(--border-color)', paddingTop: '20px', fontSize: '12px', color: '#64748B', textAlign: 'center' }}>
+          <span style={{ fontWeight: '600' }}>Testing Account:</span> <code style={{ fontSize: '11px', background: '#F1F5F9', padding: '2px 4px', borderRadius: '4px' }}>admin</code> / <code style={{ fontSize: '11px', background: '#F1F5F9', padding: '2px 4px', borderRadius: '4px' }}>password</code>
         </div>
       </div>
     </div>

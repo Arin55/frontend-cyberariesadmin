@@ -16,13 +16,13 @@ const AuditProgress = () => {
   ];
 
   return (
-    <div className="page">
+    <div className="page-container">
       <div className="page-header" style={{ marginBottom: '24px' }}>
         <h1 className="page-title">Audit Progress</h1>
         <p className="page-subtitle">Track completion metrics across all active audits.</p>
       </div>
 
-      <div style={{ display: 'grid', gridTemplateColumns: '1fr 2fr', gap: '24px' }}>
+      <div className="responsive-two-col">
         <div className="card">
           <h3 style={{ fontSize: '16px', fontWeight: 600, marginBottom: '20px' }}>Overall Progress</h3>
           <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>

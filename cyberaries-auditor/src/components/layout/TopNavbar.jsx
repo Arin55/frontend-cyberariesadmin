@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
-import { Bell, Search, User, LogOut, CheckCircle, ShieldAlert, Menu, Upload, Cpu, AlertTriangle, FileText, UserCheck } from 'lucide-react';
+import { Bell, Search, User, LogOut, CheckCircle, ShieldAlert, Menu, Upload, Cpu, AlertTriangle, FileText, UserCheck, Settings } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
-import './TopNavbar.css';
 
 const TopNavbar = ({ onToggleSidebar }) => {
   const { user, logout } = useAuth();

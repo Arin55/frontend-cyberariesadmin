@@ -11,7 +11,7 @@ const Notifications = () => {
   ];
 
   return (
-    <div className="page" style={{ maxWidth: '800px', margin: '0 auto' }}>
+    <div className="page-container" style={{ maxWidth: '800px', margin: '0 auto' }}>
       <div className="page-header" style={{ marginBottom: '24px' }}>
         <h1 className="page-title">Notifications</h1>
       </div>

@@ -30,7 +30,7 @@ const Dashboard = () => {
   ];
 
   return (
-    <div className="page-container" style={{ padding: 0 }}>
+    <div className="page-container">
       <div className="page-header">
         <div className="page-title-section">
           <h1 className="page-title">Welcome, Rahul Sharma</h1>

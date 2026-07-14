@@ -39,14 +39,12 @@ export default function Sidebar({ isOpen, onClose }) {
 
   return (
     <aside className={`app-sidebar ${isOpen ? 'open' : ''}`}>
-      <div className="sidebar-header" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', height: '90px', padding: '12px 24px' }}>
-        <div style={{ flexGrow: 1, display: 'flex', justifyContent: 'center' }}>
-          <img src={logo} alt="CyberAries Logo" className="sidebar-logo" />
-        </div>
+      <div className="sidebar-header">
+        <img src={logo} alt="CyberAries Logo" className="sidebar-logo" />
         <button 
           className="sidebar-close-mobile-btn" 
           onClick={onClose} 
-          style={{ background: 'none', border: 'none', cursor: 'pointer', color: 'var(--text-secondary)', display: 'none' }}
+          aria-label="Close sidebar"
         >
           <X size={20} />
         </button>
